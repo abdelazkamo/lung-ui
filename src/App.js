@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { ImageUpload } from "./pages/home";
+import SignIn from "./pages/public/signIn";
+import SignUp from "./pages/public/signUp";
+import ForgotPassword from "./pages/public/forgotPassword";
+import ResetPassword from "./pages/public/resetPassword";
 
 function App() {
+  // Check if a token is present in local storage
+  const RequireAuth = ({ children }) => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      return <Navigate to="/sign-in" />;
+    }
+    return <>{children}</>;
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <ToastContainer theme="colored" />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <RequireAuth>
+              <ImageUpload />
+            </RequireAuth>
+          }
+        />
+        <Route path="sign-in" element={<SignIn />} />
+        <Route path="forgot-password" element={<ForgotPassword />} />
+        <Route path="reset-password/:id" element={<ResetPassword />} />
+        <Route path="sign-up" element={<SignUp />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

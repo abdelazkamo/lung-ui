@@ -1,0 +1,11 @@
+.react-datepicker__triangle {
+  border-bottom-color: transparent; /* Hide the triangle */
+}
+.react-datepicker__input-container input {
+  background-color: transparent;
+  border: 1px solid grey;
+  border-radius: 5px;
+  height: 45px;
+  padding-left: 0.5rem;
+  /*text-align: center;*/
+}
