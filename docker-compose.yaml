@@ -1,0 +1,9 @@
+services:
+  web:
+    build:
+      context: .
+    container_name: lung_ui_c
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
